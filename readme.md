@@ -21,6 +21,15 @@ The application keeps track of all completed days throughout the month. At the e
 ## Technologies Used
 - Python 3.x
 - Flask
+- SQLite
 - HTML
 - CSS
 - JavaScript (if applicable)
+
+## Usage
+Upon visiting the application, you will be greeted with a daily motivational quote. You can navigate to the tasks page to add, manage, and complete tasks. As you complete all your tasks for the day, the plant on the main page will grow, motivating you to maintain your productivity streak. At the end of the month, you can view your performance rating on the rating page.
+
+## License
+This project is licensed under the MIT License.
+
+We hope this application, albiet simple, helps you stay motivated and achieve your goals! If you have any questions or need further assistance, please don't hesitate to reach out!
