@@ -7,7 +7,7 @@ Welcome to the Motivation Tracker web application! This application utilizes Pyt
 ## Features
 
 ### Daily Motivational Quotes
-The application uses an external [motivational quote API](docs.zenquotes.io) to provide users with a fresh quote every day. This feature helps users stay motivated and inspired throughout their day.
+The application uses an external [motivational quote API](www.docs.zenquotes.io) to provide users with a fresh quote every day. This feature helps users stay motivated and inspired throughout their day.
 
 ### Task Tracking
 Users can add tasks they need to complete and mark them as complete when finished. The application provides a simple and intuitive interface for managing tasks, ensuring users can stay organized and focused.
