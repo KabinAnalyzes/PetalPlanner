@@ -2,14 +2,17 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import os
+from flask_caching import Cache
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 db = SQLAlchemy()
-
+cache = Cache(config={'CACHE_TYPE': 'simple'})
 
 def create_app():
+
     app=Flask(__name__)
+    cache.init_app(app)
 
     app.config['SECRET_KEY'] = "secret-key"
     app.config['SQLALCHEMY_DATABASE_URI'] =\
