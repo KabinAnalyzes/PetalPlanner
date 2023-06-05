@@ -18,9 +18,21 @@ As a form of motivation, the application rewards users with a growing plant when
 ### Monthly Progress Tracking
 The application keeps track of all completed days throughout the month. At the end of each month, users receive a rating based on their overall performance. This rating reflects their consistency and helps them analyze their progress over time
 
-## File Structure
+## Application Structure
 
-TBD
+motivation-project/
+├── flaskr
+    ├── __init__.py
+    ├── main.py
+    ├── auth.py
+    ├── model.py
+    ├── db.db
+    ├──templates/
+        ├── base.html
+        ├── login.html
+        ├── index.html
+        ├── signup.html
+        └── profile.html
 
 ## Technologies Used
 - Python 3.x
