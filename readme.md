@@ -21,6 +21,7 @@ The application keeps track of all completed days throughout the month. At the e
 ## Application Structure
 
 motivation-project/
+```
 ├── flaskr
     ├── __init__.py
     ├── main.py
@@ -33,7 +34,7 @@ motivation-project/
         ├── index.html
         ├── signup.html
         └── profile.html
-
+```
 ## Technologies Used
 - Python 3.x
 - Flask
