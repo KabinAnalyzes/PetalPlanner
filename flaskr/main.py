@@ -3,7 +3,6 @@ from flask_login import login_required, current_user
 from sqlalchemy.exc import IntegrityError
 import requests
 from . import db
-from .models import Quote
 from datetime import date
 from . import cache
 
