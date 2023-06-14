@@ -1,0 +1,2 @@
+1. Change code so that Todolist is user specific (WIP)
+2. Add caching for quote of the day so that it doesnt affect TodoList performance and Display / (Complete)
