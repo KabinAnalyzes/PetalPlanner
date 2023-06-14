@@ -1,2 +1,6 @@
-1. Change code so that Todolist is user specific (WIP)
+1. Change code so that Todolist is user specific / (Complete)
 2. Add caching for quote of the day so that it doesnt affect TodoList performance and Display / (Complete)
+3. Add User statistics for completed tasks / (WIP)
+4. Add User statistics to be displayed on profile page / (WIP)
+5. Add point system for completed tasks / (WIP)
+6. Add Calendar to display completed tasks / (WIP)
