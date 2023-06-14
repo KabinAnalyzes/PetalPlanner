@@ -30,7 +30,7 @@ def home():
 @login_required
 def index():
     text = api_call()
-    todo_list = db.session.query(Todo).all()
+    todo_list = db.session.query(Todo).filter(Todo.username == current_user.username).all()
     return render_template('index.html', quote=text, todo_list=todo_list)
 
 @main.post('/add')
@@ -41,7 +41,8 @@ def index():
 def add():
     title = request.form.get("title")
     new_todo = Todo(title=title, complete=False)
-    #username = current_user.username
+    username = current_user.username
+    new_todo.username = username
     db.session.add(new_todo)
     db.session.commit()
     return redirect(url_for("main.index"))

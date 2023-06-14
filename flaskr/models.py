@@ -17,7 +17,7 @@ class User(UserMixin, db.Model):
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    #username = db.Column(db.String(32), index=True, unique=True)
+    username = db.Column(db.String(32), index=True, unique=True)
     title = db.Column(db.String(200), nullable=False)
     complete = db.Column(db.Boolean)
 
