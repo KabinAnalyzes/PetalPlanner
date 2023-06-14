@@ -7,7 +7,7 @@ from flask_caching import Cache
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 db = SQLAlchemy()
-cache = Cache(config={'CACHE_TYPE': 'simple'})
+cache = Cache(config={'CACHE_TYPE': 'simple','CACHE_DEFAULT_TIMEOUT': 86400})
 
 def create_app():
 
