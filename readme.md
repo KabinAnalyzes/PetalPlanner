@@ -1,8 +1,8 @@
-# Motivational Web App
+# Motivational Web App*
 
 ## Overview
 
-Welcome to the Motivation Tracker web application! This application utilizes Python Flask for the backend and HTML and CSS for the frontend. Its main purpose is to provide users with daily motivational quotes, allow them to add tasks they need to complete, and track their progress throughout the month. Additionally, as a source of motivation, the application displays a growing plant when users complete all their tasks for the day.
+Welcome to the Motivation Tracker* web application! This application utilizes Python Flask for the backend and HTML and CSS for the front end. Its main purpose is to provide users with daily motivational quotes, allow them to add tasks they need to complete, and track their progress throughout the month. Additionally, as a source of motivation, the application displays a growing plant when users complete all their tasks for the day.
 
 ## Features
 
@@ -26,10 +26,13 @@ motivation-project/
     ├── __init__.py
     ├── main.py
     ├── auth.py
-    ├── model.py
-    ├── db.db
+    ├── models.py
+    ├── data.db
+    ├──static/
+        ├── style.css
     ├──templates/
         ├── base.html
+        ├── home.html
         ├── login.html
         ├── index.html
         ├── signup.html
@@ -49,4 +52,4 @@ Upon visiting the application, you will be greeted with a daily motivational quo
 ## License
 This project is licensed under the MIT License.
 
-We hope this application, albiet simple, helps you stay motivated and achieve your goals! If you have any questions or need further assistance, please don't hesitate to reach out!
+We hope this application, albeit simple, helps you stay motivated and achieve your goals! If you have any questions or need further assistance, please don't hesitate to reach out!
