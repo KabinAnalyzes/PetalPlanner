@@ -23,6 +23,32 @@
     }
 }
 
+#calendar {
+    border: 2px solid black;
+    display: grid;
+    background-color: rgb(153, 157, 157);
+    grid-template-columns: repeat(7, 1);
+    font-size: 12px; /* Reduce font size */
+    width: 250px; /* Adjust width as desired */
+    position: inherit;
+    left : 550px;
+  }
+  
+#calendar div {
+  padding: 5px;
+  border: 1px solid #000000;
+  text-align: center;
+}
+
+#calendar div:hover {
+  background-color: #eee;
+}
+
+.selected {
+  background-color: #009688;
+  color: #fff;
+}
+  
 .breadcrumb, .button, .delete, .file, .is-unselectable, .modal-close, .pagination-ellipsis, .pagination-link, .pagination-next, .pagination-previous, .tabs {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -1491,7 +1517,8 @@ a.box:active {
     padding-right: .75em;
     padding-top: calc(.375em - 1px);
     text-align: center;
-    white-space: nowrap
+    white-space: nowrap;
+    position: inherit;
 }
 
 .button strong {
@@ -2602,7 +2629,7 @@ a.box:active {
 }
 
 .buttons.has-addons .button.is-expanded {
-    flex-grow: 1
+    flex-grow: 1;
 }
 
 .buttons.is-centered {
@@ -3796,6 +3823,18 @@ a.box:active {
     text-overflow: ellipsis
 }
 
+.bordered-div {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 1em;
+    display: inline-block;
+}
+
+.blank-div {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
 .file-icon {
     align-items: center;
     display: flex;
@@ -3879,7 +3918,7 @@ a.box:active {
 }
 
 .field:not(:last-child) {
-    margin-bottom: .75rem
+    margin-bottom: .75rem;
 }
 
 .field.has-addons {

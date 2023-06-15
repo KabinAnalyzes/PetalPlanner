@@ -41,10 +41,14 @@ def signup_post():
     username = request.form.get('name')
     password = request.form.get('password')
 
-    user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
+    user_email = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
+    user_username = User.query.filter_by(username=username).first() # if this returns a user, then the username already exists in database
 
-    if user: #if user is found then we want to redirect back to signup page so user can try again
+    if user_email: #if user is found then we want to redirect back to signup page so user can try again
         flash('Email address already exists')
+        return redirect(url_for('auth.signup'))
+    elif user_username:
+        flash('Username already exists')
         return redirect(url_for('auth.signup'))
     
     #create new user with form data. Hash the password so plaintext version isn't saved

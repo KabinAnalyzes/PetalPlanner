@@ -4,28 +4,39 @@
 {% block content %}
 <h1 class="title">
   Todo List App
+  
 </h1>
   <div style="margin-top: 50px;" class="ui container">
-      <h1 class="ui center aligned header">To Do App</h1>
-
+      <div id="calendar"></div>
+      <br>
+      
       <form class="ui form" action="/add" method="post">
           <div class="field">
               <label>Todo Title</label>
               <input type="text" name="title" placeholder="Enter Todo..."><br>
+              <label>Category</label>
+              <input type="text" name="category" placeholder="Enter Category..."><br> <br>
+              <button class="ui blue button" type="submit">Add</button>
           </div>
-          <button class="ui blue button" type="submit">Add</button>
       </form>
-
+      
+    
+      
+      
+      <div class="blank-div"></div>
 
       {% for todo in todo_list %}
-      <div class="ui segment">
-          <p class="ui big header">{{todo.id }} | {{ todo.title }}</p>
+      <div class="bordered-div">
+          <p class="ui big header"> Task: {{ todo.title }} <br> Category: {{todo.category}}</p>
 
+          <br>
           {% if todo.complete == False %}
-          <span class="ui gray label">Not Complete</span>
+          <span class="bordered-div">Not Complete</span>
           {% else %}
-          <span class="ui green label">Completed</span>
+          <span class="bordered-div">Completed</span>
           {% endif %}
+          <div class="blank-div"></div>
+          
 
           <a class="ui blue button" href="/update/{{ todo.id }}">Update</a>
           <a class="ui red button" href="/delete/{{ todo.id }}">Delete</a>

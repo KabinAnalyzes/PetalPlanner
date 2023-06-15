@@ -40,8 +40,12 @@ def index():
 @login_required
 def add():
     title = request.form.get("title")
+    category = request.form.get("category")
     new_todo = Todo(title=title, complete=False)
     username = current_user.username
+    date_created = date.today()
+    new_todo.category = category
+    new_todo.date_created = date_created
     new_todo.username = username
     db.session.add(new_todo)
     db.session.commit()
