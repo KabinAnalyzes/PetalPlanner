@@ -23,32 +23,57 @@
     }
 }
 
-#calendar {
-    border: 2px solid black;
-    display: grid;
-    background-color: rgb(153, 157, 157);
-    grid-template-columns: repeat(7, 1);
-    font-size: 12px; /* Reduce font size */
-    width: 250px; /* Adjust width as desired */
-    position: inherit;
-    left : 550px;
-  }
-  
-#calendar div {
-  padding: 5px;
-  border: 1px solid #000000;
-  text-align: center;
+.login-box {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.26);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+
+}
+label {
+    display: block;
+    margin-bottom: 2px;
+    font-weight: bold;
 }
 
-#calendar div:hover {
-  background-color: #eee;
+input[type='text'], input[type='password'] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
 }
 
-.selected {
-  background-color: #009688;
-  color: #fff;
+input[type='submit'] {
+    background-color: #949494;
+    font-family: 'Poppins', sans-serif;
+
+    width: 90%;
+    height: 45px;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
-  
+
+input[type='submit']:hover {
+    background-color: #45a049;
+}
+
+@media screen and (max-width: 600px) {
+    .login-box {
+        max-width: 300px;
+    }
+}
+    
 .breadcrumb, .button, .delete, .file, .is-unselectable, .modal-close, .pagination-ellipsis, .pagination-link, .pagination-next, .pagination-previous, .tabs {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
