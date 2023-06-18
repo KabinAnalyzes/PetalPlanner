@@ -22,7 +22,20 @@
         transform: rotate(359deg)
     }
 }
+.body{
+    background-image: url("/flaskr/templates/summer.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.quote-box{
+    position: relative;
+    transform: translate(0%, -110%);
+    max-width: 400px;
+    font-weight: bold;
+    font-size: larger;
+    font-family: 'Avantgarde, TeX Gyre Adventor, URW Gothic L', sans-serif
 
+}
 .login-box {
     position: relative;
     top: 50%;
@@ -70,6 +83,26 @@ input[type='submit']:hover {
 
 @media screen and (max-width: 600px) {
     .login-box {
+        max-width: 300px;
+    }
+}
+
+.todo-box {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-165%, -20%);
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.26);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+
+}
+
+@media screen and (max-width: 600px) {
+    .todo-box {
         max-width: 300px;
     }
 }
@@ -312,6 +345,9 @@ code, pre {
 }
 
 body {
+    background-image: url(/flaskr/templates/summer.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     color: #4a4a4a;
     font-size: 1rem;
     font-weight: 400;
@@ -3849,10 +3885,29 @@ a.box:active {
 }
 
 .bordered-div {
-    border: 1px solid #dbdbdb;
+    border: 2px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 1em;
+    max-width: 400px;
+    display: inline-block;
+    opacity: 0.9;
+}
+
+.incomplete-div {
+    border: 2px solid #dbdbdb;
     border-radius: 4px;
     padding: 1em;
     display: inline-block;
+    background-color: #f54266; 
+}
+.complete-div {
+    border: 2px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 1em;
+    padding-left: 26px; 
+    padding-right: 26px;
+    display: inline-block;
+    background-color: #5f996a; 
 }
 
 .blank-div {
@@ -9718,7 +9773,10 @@ a.panel-block:hover, label.panel-block:hover {
 
 .hero.is-primary {
     background-color: #3d3d40 ;
-    color: #fff
+    color: #fff;
+    background-image: url("/flaskr/templates/summer.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .hero.is-primary a:not(.button):not(.dropdown-item):not(.tag), .hero.is-primary strong {
@@ -10175,7 +10233,10 @@ a.panel-block:hover, label.panel-block:hover {
 
 .hero.is-fullheight .hero-body, .hero.is-fullheight-with-navbar .hero-body, .hero.is-halfheight .hero-body {
     align-items: center;
-    display: flex
+    display: flex;
+    background-image: url("/flaskr/templates/summer.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .hero.is-fullheight .hero-body>.container, .hero.is-fullheight-with-navbar .hero-body>.container, .hero.is-halfheight .hero-body>.container {
@@ -10188,7 +10249,11 @@ a.panel-block:hover, label.panel-block:hover {
 }
 
 .hero.is-fullheight {
-    min-height: 100vh
+    min-height: 100vh;
+    background-image: url("/flaskr/templates/summer.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
 }
 
 .hero.is-fullheight-with-navbar {
@@ -10252,7 +10317,10 @@ a.panel-block:hover, label.panel-block:hover {
 .hero-body {
     flex-grow: 1;
     flex-shrink: 0;
-    padding: 3rem 1.5rem
+    padding: 3rem 1.5rem;
+    background-image: url("/flaskr/templates/summer.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .section {

@@ -2,21 +2,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-  Todo List App
-  
+<body>
+<h1 class="quote-box">
+  {{ quote }} 
+  {{ author }}
 </h1>
-  <div style="margin-top: 50px;" class="formbox">
-      <h2 styles="text-align: center; font-family: 'Poppins',sans-serif;">
-          <div class="login-box">
+  <div class="formbox">
+          <div class="todo-box">
                 <h2 style="text-align: center;font-family: 'Poppins', sans-serif; color: #83617A;"></h2>
                 <br>
                 <form action="/add" method="post">
                     <label for="Todo Item"></label>
                     <input type="text" name="title" id="Item" placeholder="Todo Item" required>
         
-                    <label for="Category"></label>
-                    <input type="text" name="Category" id="Category" placeholder="Category" required>
+                    <label for="category"></label>
+                    <input type="text" name="category" id="category" placeholder="Category" required>
         
                     <input style="font-family: 'Poppins',sans-serif; font-size: 16px; font-weight: 600;" type="submit" value="Add">
         
@@ -36,9 +36,9 @@
 
           <br>
           {% if todo.complete == False %}
-          <span class="bordered-div">Not Complete</span>
+          <span class="incomplete-div">Not Complete</span>
           {% else %}
-          <span class="bordered-div">Completed</span>
+          <span class="complete-div">  Completed  </span>
           {% endif %}
           <div class="blank-div"></div>
           
@@ -48,13 +48,5 @@
       </div>
       {% endfor %}
   </div>
-
-  <hr> 
-
-<body>
-    <h2 class="subtitle">
-      {{ quote }} 
-      {{ author }}
-    </h2>
 </body>
 {% endblock %}
