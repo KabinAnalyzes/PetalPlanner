@@ -5,7 +5,7 @@ import requests
 from . import db
 from datetime import date
 from . import cache
-from .models import Todo
+from .models import Todo, Statistics
 
 main = Blueprint('main', __name__)
 
@@ -56,9 +56,28 @@ def add():
 # redirect to index page
 @login_required
 def update(todo_id):
+    # query statistics table for current user, with current month and year
+    # if it doens't exist, create new row with current month and year
+    # query todo table for todo item with todo_id
+    if db.session.query(Statistics).filter(Statistics.username == current_user.username, Statistics.month == date.today().strftime("%B"), Statistics.year == date.today().strftime("%Y")).first() is None:
+        new_stats = Statistics(username=current_user.username, month=date.today().strftime("%B"), year=date.today().strftime("%Y"))
+        db.session.add(new_stats)
+        db.session.commit()
+        
+    stats = db.session.query(Statistics).filter(Statistics.username == current_user.username, Statistics.month == date.today().strftime("%B"), Statistics.year == date.today().strftime("%Y")).first()
     todo = db.session.query(Todo).filter(Todo.id == todo_id).first()
-    todo.complete = not todo.complete
-    db.session.commit()
+    # check if todo item has been previously completed
+    # if not, update todo item as complete and update previously_completed to True
+    # update completed_tasks in statistics table for the current month and year
+    if todo.previously_completed == False:
+        todo.complete = not todo.complete
+        todo.previously_completed = True
+        stats.completed_tasks += 1
+        db.session.commit()
+
+    else:
+        todo.complete = not todo.complete
+        db.session.commit()
     return redirect(url_for("main.index"))
 
 @main.get("/delete/<int:todo_id>")
