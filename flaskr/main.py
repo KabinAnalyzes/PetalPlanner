@@ -7,33 +7,44 @@ from datetime import date
 from . import cache
 from .models import Todo, Statistics
 
-main = Blueprint('main', __name__)
+main = Blueprint("main", __name__)
+
 
 # Make an API call to zenquotes.io and store in cache for 24 hours
 @cache.cached()
 def api_call():
+    """
+    Make an API call to zenquotes.io and store in cache for 24 hours
+
+    :param: None
+    :return: (str) quote of the day and author
+    """
     url = "https://zenquotes.io/api/today"
     response = requests.get(url).json()
-    author = str(response[0]['a'])
-    quote = str(response[0]['q'])
+    author = str(response[0]["a"])
+    quote = str(response[0]["q"])
     text = quote + "\r\n - " + author
     return text
 
-@main.route('/')
-def home():
-    return render_template('home.html')
 
-@main.get('/todo')
-# require login to access todo page, if not logged in, redirect to login page (WIP)
-# store api call in text variable and call it in index.html
-# query all todo items from database and store in todo_list variable and call it in index.html
+@main.route("/")
+def home():
+    return render_template("home.html")
+
+
+@main.get("/todo")
+# query todo table for all todo items for current user
+# render index.html with todo_list
 @login_required
 def index():
     text = api_call()
-    todo_list = db.session.query(Todo).filter(Todo.username == current_user.username).all()
-    return render_template('index.html', quote=text, todo_list=todo_list)
+    todo_list = (
+        db.session.query(Todo).filter(Todo.username == current_user.username).all()
+    )
+    return render_template("index.html", quote=text, todo_list=todo_list)
 
-@main.post('/add')
+
+@main.post("/add")
 # title is the name of the input field in index.html
 # create new todo item and add to database
 # redirect to index page
@@ -51,20 +62,42 @@ def add():
     db.session.commit()
     return redirect(url_for("main.index"))
 
+
 @main.get("/update/<int:todo_id>")
-# update todo item in database as complete or not 
+# update todo item in database as complete or not
 # redirect to index page
 @login_required
 def update(todo_id):
     # query statistics table for current user, with current month and year
     # if it doens't exist, create new row with current month and year
     # query todo table for todo item with todo_id
-    if db.session.query(Statistics).filter(Statistics.username == current_user.username, Statistics.month == date.today().strftime("%B"), Statistics.year == date.today().strftime("%Y")).first() is None:
-        new_stats = Statistics(username=current_user.username, month=date.today().strftime("%B"), year=date.today().strftime("%Y"))
+    if (
+        db.session.query(Statistics)
+        .filter(
+            Statistics.username == current_user.username,
+            Statistics.month == date.today().strftime("%B"),
+            Statistics.year == date.today().strftime("%Y"),
+        )
+        .first()
+        is None
+    ):
+        new_stats = Statistics(
+            username=current_user.username,
+            month=date.today().strftime("%B"),
+            year=date.today().strftime("%Y"),
+        )
         db.session.add(new_stats)
         db.session.commit()
-        
-    stats = db.session.query(Statistics).filter(Statistics.username == current_user.username, Statistics.month == date.today().strftime("%B"), Statistics.year == date.today().strftime("%Y")).first()
+
+    stats = (
+        db.session.query(Statistics)
+        .filter(
+            Statistics.username == current_user.username,
+            Statistics.month == date.today().strftime("%B"),
+            Statistics.year == date.today().strftime("%Y"),
+        )
+        .first()
+    )
     todo = db.session.query(Todo).filter(Todo.id == todo_id).first()
     # check if todo item has been previously completed
     # if not, update todo item as complete and update previously_completed to True
@@ -80,6 +113,7 @@ def update(todo_id):
         db.session.commit()
     return redirect(url_for("main.index"))
 
+
 @main.get("/delete/<int:todo_id>")
 # delete todo item from database
 # redirect to index page
@@ -89,9 +123,32 @@ def delete(todo_id):
     db.session.commit()
     return redirect(url_for("main.index"))
 
-@main.route('/profile')
-# redirect to profile page which will display user information (WIP)
+
+@main.route("/profile")
+# redirects to profile page with current user's username and statistics for the current month and year
 @login_required
 def profile():
-    return render_template('profile.html', name=current_user.username)
-
+    monthly_stats = (
+        db.session.query(Statistics)
+        .filter(
+            Statistics.username == current_user.username,
+            Statistics.month == date.today().strftime("%B"),
+            Statistics.year == date.today().strftime("%Y"),
+        )
+        .first()
+    )
+    if monthly_stats is None:
+        monthly_stats = "No statistics for this month"
+        month = date.today().strftime("%B")
+        year = date.today().strftime("%Y")
+    else:
+        monthly_stats = monthly_stats.completed_tasks
+        month = date.today().strftime("%B")
+        year = date.today().strftime("%Y")
+    return render_template(
+        "profile.html",
+        name=current_user.username,
+        tasks=monthly_stats,
+        month=month,
+        year=year,
+    )
