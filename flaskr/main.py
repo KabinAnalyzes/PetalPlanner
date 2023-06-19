@@ -138,7 +138,7 @@ def profile():
         .first()
     )
     if monthly_stats is None:
-        monthly_stats = "No statistics for this month"
+        monthly_stats = 0
         month = date.today().strftime("%B")
         year = date.today().strftime("%Y")
     else:

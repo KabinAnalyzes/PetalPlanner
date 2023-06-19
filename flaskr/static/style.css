@@ -28,6 +28,8 @@
     background-size: cover;
 }
 .quote-box{
+    display: flex;
+    flex-direction: column;
     position: relative;
     transform: translate(0%, -110%);
     max-width: 400px;
@@ -36,7 +38,15 @@
     font-family: 'Avantgarde, TeX Gyre Adventor, URW Gothic L', sans-serif
 
 }
+@media screen and (max-width: 600px) {
+    .quote-box {
+        max-width: 300px;
+    }
+}
+
 .login-box {
+    display: flex;
+    flex-direction: column;
     position: relative;
     top: 50%;
     left: 50%;
@@ -49,6 +59,12 @@
     text-align: center;
 
 }
+@media screen and (max-width: 600px) {
+    .login-box {
+        max-width: 300px;
+    }
+}
+    
 label {
     display: block;
     margin-bottom: 2px;
@@ -88,25 +104,160 @@ input[type='submit']:hover {
 }
 
 .todo-box {
+    display: flex;
+    flex-direction: column;
     position: relative;
     top: 50%;
-    left: 50%;
-    transform: translate(-165%, -20%);
+    left: 0%;
+    /* transform: translate(-165%, -20%); */
     max-width: 400px;
+    min-width: 400px;
     padding: 20px;
     border-radius: 10px;
     background-color: rgba(255,255,255,0.26);
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     text-align: center;
+    width: 45%;
 
 }
-
 @media screen and (max-width: 600px) {
     .todo-box {
-        max-width: 300px;
+        max-width: 400px;
     }
 }
-    
+
+
+
+.todo-contain {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 50%;
+    left: 0%;
+    height: 450px;
+    overflow: auto;
+    width: 400px;
+    border-radius: 10px;
+}
+.bordered-div {
+    display: flex;
+    flex-direction: column; 
+    border: 2px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 1em;
+    max-width: 400px;
+    max-height: 400px;
+    display: inline-block;
+    background-color: rgba(255,255,255,0.26);
+    opacity: 0.9;
+}
+.calendar{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 30%;
+    left: 75%; /* Adjust the left value to create spacing between the two divs */
+    transform: translate(-50%, -50%);
+    border: 2px solid #dbdbdb;
+    background-color: rgba(255,255,255,0.26); ;
+
+}
+
+.calendar-widget {
+    font-family: Arial, sans-serif;
+    color: black;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 4px;
+    padding: 1em;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .calendar-body {
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    border-radius: 4px;
+    padding: 1em;   
+  }
+  
+  .days-of-week {
+    display: flex;
+  }
+  
+  .day {
+    flex: 1;
+    text-align: center;
+    padding: 5px;
+  }
+  
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .form-group {
+    margin: 0 10px;
+  }
+  
+  select {
+    padding: 5px;
+    font-size: 14px;
+    background-color: #009e6c;
+  }
+  
+  button {
+    background-color: #ccc;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #a5f39e;
+  }
+  
+.plant
+{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 70%;
+    left: 75%; /* Adjust the left value to create spacing between the two divs */
+    transform: translate(-50%, -50%);
+    border: 2px solid #dbdbdb;
+
+}
+
+.incomplete-div {
+    border: 2px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 1em;
+    display: inline-block;
+    background-color: #f54266; 
+}
+.complete-div {
+    border: 2px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 1em;
+    padding-left: 26px; 
+    padding-right: 26px;
+    display: inline-block;
+    background-color: #5f996a; 
+}
+
+.blank-div {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
 .breadcrumb, .button, .delete, .file, .is-unselectable, .modal-close, .pagination-ellipsis, .pagination-link, .pagination-next, .pagination-previous, .tabs {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -3882,37 +4033,6 @@ a.box:active {
     overflow: hidden;
     text-align: left;
     text-overflow: ellipsis
-}
-
-.bordered-div {
-    border: 2px solid #dbdbdb;
-    border-radius: 4px;
-    padding: 1em;
-    max-width: 400px;
-    display: inline-block;
-    opacity: 0.9;
-}
-
-.incomplete-div {
-    border: 2px solid #dbdbdb;
-    border-radius: 4px;
-    padding: 1em;
-    display: inline-block;
-    background-color: #f54266; 
-}
-.complete-div {
-    border: 2px solid #dbdbdb;
-    border-radius: 4px;
-    padding: 1em;
-    padding-left: 26px; 
-    padding-right: 26px;
-    display: inline-block;
-    background-color: #5f996a; 
-}
-
-.blank-div {
-    margin-bottom: 20px;
-    padding-bottom: 10px;
 }
 
 .file-icon {
@@ -9472,6 +9592,8 @@ a.panel-block:hover, label.panel-block:hover {
 }
 
 .hero .navbar {
+    display: flex;
+    flex-direction: column;
     background: 0 0
 }
 

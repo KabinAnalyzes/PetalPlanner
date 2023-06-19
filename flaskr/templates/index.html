@@ -3,13 +3,12 @@
 
 {% block content %}
 <body>
+
 <h1 class="quote-box">
   {{ quote }} 
   {{ author }}
 </h1>
-  <div class="formbox">
           <div class="todo-box">
-                <h2 style="text-align: center;font-family: 'Poppins', sans-serif; color: #83617A;"></h2>
                 <br>
                 <form action="/add" method="post">
                     <label for="Todo Item"></label>
@@ -21,7 +20,6 @@
                     <input style="font-family: 'Poppins',sans-serif; font-size: 16px; font-weight: 600;" type="submit" value="Add">
         
                 </form>
-            
           </div>
       </form>
       </h2>
@@ -29,7 +27,7 @@
       
       
       <div class="blank-div"></div>
-
+<div class="todo-contain" >
       {% for todo in todo_list %}
       <div class="bordered-div">
           <p class="ui big header"> Task: {{ todo.title }} <br> Category: {{todo.category}}</p>
@@ -46,7 +44,14 @@
           <a class="ui blue button" href="/update/{{ todo.id }}">Update</a>
           <a class="ui red button" href="/delete/{{ todo.id }}">Delete</a>
       </div>
+      <br>
       {% endfor %}
   </div>
+</div>
+<div id="calendar" class="calendar">
+
+</div>
+<div class="plant">
+  <p>Plant Placeholder</p>
 </body>
 {% endblock %}
