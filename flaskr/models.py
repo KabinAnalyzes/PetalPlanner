@@ -15,13 +15,13 @@ class User(db.Model):
 
     def __repr__(self):
         return "<User %r>" % self.username
-    
+
     def is_active(self):
         return True
 
     def get_id(self):
         return str(self.id)
-    
+
     @property
     def is_authenticated(self):
         return True
@@ -29,7 +29,6 @@ class User(db.Model):
     @property
     def is_anonymous(self):
         return False
-
 
 
 class Todo(db.Model):
@@ -44,9 +43,10 @@ class Todo(db.Model):
     def __repr__(self):
         return "<Task %r>" % self.id
 
+
 class Statistics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(32), db.ForeignKey('user.username'))
+    username = db.Column(db.String(32), db.ForeignKey("user.username"))
     month = db.Column(db.String(32), index=True, unique=False)
     year = db.Column(db.String(32), index=True, unique=False)
     completed_tasks = db.Column(db.Integer, default=0)
