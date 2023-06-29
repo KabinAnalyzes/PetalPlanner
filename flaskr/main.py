@@ -6,6 +6,8 @@ from . import db
 from datetime import date
 from . import cache
 from .models import Todo, Statistics
+import json
+from datetime import datetime
 
 main = Blueprint("main", __name__)
 
@@ -31,18 +33,36 @@ def api_call():
 def home():
     return render_template("home.html")
 
-
-@main.get("/todo")
+@main.route("/todo", methods=["POST", "GET"])
 # query todo table for all todo items for current user
 # render index.html with todo_list
 @login_required
-def index():
+def index(todo_list=None, selected_date=None):
     text = api_call()
+    selected_date = request.form.get("selected_date")   
     todo_list = (
         db.session.query(Todo).filter(Todo.username == current_user.username).all()
     )
-    return render_template("index.html", quote=text, todo_list=todo_list)
 
+    return render_template("index.html", quote=text, todo_list=todo_list, selected_date=selected_date)
+
+@main.route("/update_date", methods=["POST"])
+@login_required
+def update_date():
+    text = api_call()
+    selected_date = request.form.get("date") 
+    # convert selected_date to same datetime format as date_created and query todo table for all todo items for current user made on selected date
+    formatted_date = datetime.strptime(selected_date, '%Y-%m-%d')
+    todo_list = (
+        db.session.query(Todo)
+        .filter(
+            Todo.username == current_user.username,
+            Todo.date_created == formatted_date ,
+        )
+        .all()
+    )
+    
+    return render_template("index.html", selected_date=selected_date, quote=text, todo_list=todo_list)
 
 @main.post("/add")
 # title is the name of the input field in index.html

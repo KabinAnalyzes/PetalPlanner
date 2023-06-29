@@ -162,7 +162,21 @@ input[type='submit']:hover {
     background-color: rgba(255,255,255,0.26); ;
 
 }
+.input-wrapper {
+    position: relative;
+    display: flex;
+    left: 5%;
+    flex-direction: column;
+    margin-right: 10px;
+    padding: 10px;
+  }
 
+.simple-button {
+    display: flex;
+    flex-direction: column; 
+    padding: 10px;
+    border-radius: 10px;
+}
 .calendar-widget {
     font-family: Arial, sans-serif;
     color: black;

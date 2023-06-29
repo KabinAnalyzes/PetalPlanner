@@ -30,7 +30,7 @@
 <div class="todo-contain" >
       {% for todo in todo_list %}
       <div class="bordered-div">
-          <p class="ui big header"> Task: {{ todo.title }} <br> Category: {{todo.category}}</p>
+          <p class="ui big header"> Task: {{ todo.title }} <br> Category: {{todo.category}} <hr> Date Added: {{ todo.date_created}} </p>
 
           <br>
           {% if todo.complete == False %}
@@ -48,10 +48,27 @@
       {% endfor %}
   </div>
 </div>
-<div id="calendar" class="calendar">
+<div class="calendar">
+  <form action="/update_date" method="POST">
+    <div class="input-wrapper">
+    <label for="date">Select a date:</label>
+    <input type="date" id="date" name="date">
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+    <div class="simple-button">
+      <button onclick="redirectToPage()">Go to Another Page</button>
 
+      <script>
+        function redirectToPage() {
+          window.location.href = "/todo";  // Replace with the desired URL
+        }
+      </script>
+    </div>
+
+    
 </div>
 <div class="plant">
-  <p>Plant Placeholder</p>
+  <p>{{ selected_date }} </p>
 </body>
 {% endblock %}
