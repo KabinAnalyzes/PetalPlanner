@@ -31,7 +31,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    transform: translate(0%, -110%);
+    transform: translate(0%, -40%);
     max-width: 400px;
     font-weight: bold;
     font-size: larger;
@@ -151,11 +151,18 @@ input[type='submit']:hover {
     background-color: rgba(255,255,255,0.26);
     opacity: 0.9;
 }
+.celebration { 
+    background-color: #00c4a7;
+    border: 2px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 5px;
+    max-width: 200px;
+}
 .calendar{
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 30%;
+    top: 40%;
     left: 75%; /* Adjust the left value to create spacing between the two divs */
     transform: translate(-50%, -50%);
     border: 2px solid #dbdbdb;
@@ -243,7 +250,7 @@ input[type='submit']:hover {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 70%;
+    top: 90%;
     left: 75%; /* Adjust the left value to create spacing between the two divs */
     transform: translate(-50%, -50%);
     border: 2px solid #dbdbdb;

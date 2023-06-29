@@ -3,7 +3,8 @@
 
 {% block content %}
 <body>
-
+<br>
+<br>
 <h1 class="quote-box">
   {{ quote }} 
   {{ author }}
@@ -57,11 +58,11 @@
     </div>
   </form>
     <div class="simple-button">
-      <button onclick="redirectToPage()">Go to Another Page</button>
+      <button onclick="redirectToPage()">See all items</button>
 
       <script>
         function redirectToPage() {
-          window.location.href = "/todo";  // Replace with the desired URL
+          window.location.href = "/todo";  
         }
       </script>
     </div>
@@ -69,6 +70,13 @@
     
 </div>
 <div class="plant">
-  <p>{{ selected_date }} </p>
+  {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="celebration">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}
+  <p>Plant Stage: {{ plant_stage }} </p>
 </body>
 {% endblock %}

@@ -37,14 +37,36 @@ def home():
 # query todo table for all todo items for current user
 # render index.html with todo_list
 @login_required
-def index(todo_list=None, selected_date=None):
+def index():
     text = api_call()
-    selected_date = request.form.get("selected_date")   
     todo_list = (
         db.session.query(Todo).filter(Todo.username == current_user.username).all()
     )
-
-    return render_template("index.html", quote=text, todo_list=todo_list, selected_date=selected_date)
+    plant_stats = (
+        db.session.query(Statistics)
+        .filter(
+            Statistics.username == current_user.username,
+            Statistics.month == date.today().strftime("%B"),
+            Statistics.year == date.today().strftime("%Y"),
+        )
+        .first()
+    )
+    if plant_stats is None:
+        plant_stats = 0
+        plant_stage = 0
+    else:
+        plant_stats = plant_stats.completed_tasks
+        if plant_stats <= 5:
+            plant_stage = 1
+        elif plant_stats <= 10:
+            plant_stage = 2
+        elif plant_stats <= 15:
+            plant_stage = 3
+        elif plant_stats <= 20:
+            plant_stage = 4
+            flash("Congratulations! You have completed 20 tasks this month. Your plant has reached its final stage!")
+    
+    return render_template("index.html", quote=text, todo_list=todo_list, plant_stage= plant_stage)
 
 @main.route("/update_date", methods=["POST"])
 @login_required
