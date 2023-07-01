@@ -42,7 +42,7 @@ def index():
     todo_list = (
         db.session.query(Todo).filter(Todo.username == current_user.username).all()
     )
-    plant_stats = (
+    stats = (
         db.session.query(Statistics)
         .filter(
             Statistics.username == current_user.username,
@@ -51,22 +51,18 @@ def index():
         )
         .first()
     )
-    if plant_stats is None:
+    if stats is None:
         plant_stats = 0
-        plant_stage = 0
     else:
-        plant_stats = plant_stats.completed_tasks
-        if plant_stats <= 5:
-            plant_stage = 1
-        elif plant_stats <= 10:
-            plant_stage = 2
-        elif plant_stats <= 15:
-            plant_stage = 3
-        elif plant_stats <= 20:
-            plant_stage = 4
-            flash("Congratulations! You have completed 20 tasks this month. Your plant has reached its final stage!")
+        plant_stats = stats.plants_grown
     
-    return render_template("index.html", quote=text, todo_list=todo_list, plant_stage= plant_stage)
+    
+    return render_template(
+        "index.html",
+        quote=text,
+        todo_list=todo_list,
+        plant_stats=plant_stats
+              )
 
 @main.route("/update_date", methods=["POST"])
 @login_required
@@ -83,8 +79,29 @@ def update_date():
         )
         .all()
     )
+    stats = (
+        db.session.query(Statistics)
+        .filter(
+            Statistics.username == current_user.username,
+            Statistics.month == date.today().strftime("%B"),
+            Statistics.year == date.today().strftime("%Y"),
+        )
+        .first()
+    )
+    if stats is None:
+        plant_stats = 0
+    else:
+        plant_stats = stats.plants_grown
     
-    return render_template("index.html", selected_date=selected_date, quote=text, todo_list=todo_list)
+    
+    
+    return render_template(
+        "index.html",
+        selected_date=selected_date, 
+        quote=text, 
+        plant_stats=plant_stats,
+        todo_list=todo_list
+        )
 
 @main.post("/add")
 # title is the name of the input field in index.html
@@ -94,8 +111,14 @@ def update_date():
 def add():
     title = request.form.get("title")
     category = request.form.get("category")
+    due = request.form.get("due")
     new_todo = Todo(title=title, complete=False)
     username = current_user.username
+    if due == "":
+        new_todo.due_date = None
+    else:
+        formatted_due = datetime.strptime(due, '%Y-%m-%d')
+        new_todo.due_date = formatted_due
     date_created = date.today()
     new_todo.category = category
     new_todo.date_created = date_created
@@ -148,6 +171,7 @@ def update(todo_id):
         todo.complete = not todo.complete
         todo.previously_completed = True
         stats.completed_tasks += 1
+        stats.plants_grown += 0.1
         db.session.commit()
 
     else:
@@ -181,16 +205,19 @@ def profile():
     )
     if monthly_stats is None:
         monthly_stats = 0
+        plants = 0
         month = date.today().strftime("%B")
         year = date.today().strftime("%Y")
     else:
-        monthly_stats = monthly_stats.completed_tasks
+        tasks = monthly_stats.completed_tasks
+        plants = monthly_stats.plants_grown
         month = date.today().strftime("%B")
         year = date.today().strftime("%Y")
     return render_template(
         "profile.html",
+        plants=plants,
         name=current_user.username,
-        tasks=monthly_stats,
+        tasks=tasks,
         month=month,
         year=year,
     )

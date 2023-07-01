@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% block content %}
@@ -17,7 +16,13 @@
         
                     <label for="category"></label>
                     <input type="text" name="category" id="category" placeholder="Category" required>
-        
+
+                    <label for="due" ></label>
+                    <p>Due Date:</p>
+                    <input type="date" name="due" id="due" placeholder="Due Date">
+
+                    <hr>
+
                     <input style="font-family: 'Poppins',sans-serif; font-size: 16px; font-weight: 600;" type="submit" value="Add">
         
                 </form>
@@ -31,7 +36,7 @@
 <div class="todo-contain" >
       {% for todo in todo_list %}
       <div class="bordered-div">
-          <p class="ui big header"> Task: {{ todo.title }} <br> Category: {{todo.category}} <hr> Date Added: {{ todo.date_created}} </p>
+          <p class="ui big header"> Task: {{ todo.title }} <br> Category: {{todo.category}} <hr> Date Added: {{ todo.date_created }} <br> Due Date: {{ todo.due_date }}</p>
 
           <br>
           {% if todo.complete == False %}
@@ -54,11 +59,12 @@
     <div class="input-wrapper">
     <label for="date">Select a date:</label>
     <input type="date" id="date" name="date">
+    <br>
       <input type="submit" value="Submit">
     </div>
   </form>
     <div class="simple-button">
-      <button onclick="redirectToPage()">See all items</button>
+      <button style="font-family: 'Poppins',sans-serif; font-size: 16px; font-weight: 600; border-radius: 10px; padding:10px;" onclick="redirectToPage()">See all items</button>
 
       <script>
         function redirectToPage() {
@@ -77,6 +83,6 @@
             </div>
         {% endif %}
         {% endwith %}
-  <p>Plant Stage: {{ plant_stage }} </p>
+  <p>Plants Grown: {{ plant_stats }} </p>
 </body>
 {% endblock %}

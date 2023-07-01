@@ -39,6 +39,7 @@ class Todo(db.Model):
     complete = db.Column(db.Boolean)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     previously_completed = db.Column(db.Boolean, default=False)
+    due_date = db.Column(db.DateTime(timezone=True))
 
     def __repr__(self):
         return "<Task %r>" % self.id
@@ -50,6 +51,7 @@ class Statistics(db.Model):
     month = db.Column(db.String(32), index=True, unique=False)
     year = db.Column(db.String(32), index=True, unique=False)
     completed_tasks = db.Column(db.Integer, default=0)
+    plants_grown = db.Column(db.Float, default=0.0)
 
     user = db.relationship("User", backref="statistics", lazy=True)
 

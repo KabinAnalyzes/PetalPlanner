@@ -22,6 +22,42 @@
         transform: rotate(359deg)
     }
 }
+input[type="date"] {
+    /* Remove default styling */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* Add custom styles */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+  }
+  
+  /* Style the date picker popup icon */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    /* Add custom styles */
+    color: #999;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  
+  /* Style the selected date */
+  input[type="date"]::-webkit-datetime-edit {
+    /* Add custom styles */
+    padding: 4px;
+  }
+  
+  /* Style the date input when it's focused */
+  input[type="date"]:focus {
+    /* Add custom styles */
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px #007bff;
+  }
 .body{
     background-image: url("/flaskr/templates/summer.jpg");
     background-repeat: no-repeat;
@@ -165,7 +201,9 @@ input[type='submit']:hover {
     top: 40%;
     left: 75%; /* Adjust the left value to create spacing between the two divs */
     transform: translate(-50%, -50%);
-    border: 2px solid #dbdbdb;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     background-color: rgba(255,255,255,0.26); ;
 
 }
