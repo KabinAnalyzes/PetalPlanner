@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the Motivation Tracker* web application! This application utilizes Python Flask for the backend and HTML and CSS for the front end. Its main purpose is to provide users with daily motivational quotes, allow them to add tasks they need to complete, and track their progress throughout the month. Additionally, as a source of motivation, the application displays a growing plant when users complete all their tasks for the day.
+Welcome to the Petal Planner web application! This application utilizes Python Flask for the backend and HTML and CSS for the front end. Its main purpose is to provide users with daily motivational quotes, allow them to add and keep track of tasks they need to complete, and track their progress throughout the month. Additionally, as a source of motivation, the application displays a growing plant when users complete all their tasks for the day.
 
 ## Features
 
@@ -47,9 +47,9 @@ motivation-project/
 - JavaScript (if applicable)
 
 ## Usage
-Upon visiting the application, you will be greeted with a daily motivational quote. You can navigate to the tasks page to add, manage, and complete tasks. As you complete all your tasks for the day, the plant on the main page will grow, motivating you to maintain your productivity streak. At the end of the month, you can view your performance rating on the rating page.
+Upon accessing the application, you will be greeted with a daily motivational quote. You can navigate to the tasks page to add, manage, and complete tasks. As you complete all your tasks for the day, the plant on the main page will grow, motivating you to maintain your productivity streak. At the end of the month, you can view your performance rating on the rating page.
 
 ## License
 This project is licensed under the MIT License.
 
-We hope this application, albeit simple, helps you stay motivated and achieve your goals! If you have any questions or need further assistance, please don't hesitate to reach out!
+We hope this application, albeit simple, helps you stay motivated and achieve your goals! If you have any questions, suggestions for improvements, or need further assistance, please don't hesitate to reach out!
