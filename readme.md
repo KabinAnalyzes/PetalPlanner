@@ -1,4 +1,4 @@
-# Motivational Web App*
+# Petal Planner
 
 ## Overview
 
