@@ -36,8 +36,19 @@
 <div class="todo-contain" >
       {% for todo in todo_list %}
       <div class="bordered-div">
-          <p class="ui big header"> Task: {{ todo.title }} <br> Category: {{todo.category}} <hr> Date Added: {{ todo.date_created }} <br> Due Date: {{ todo.due_date }}</p>
+          <p class="ui big header" style="font-family: 'Poppins',sans-serif; font-size: 16px; font-weight: 300;"> Task: {{ todo.title }} <br> Category: {{todo.category}} <hr> Date Added: {{ todo.date_created }} <br> Due Date: {{ todo.due_date }}</p>
 
+          {% with messages = get_flashed_messages(category_filter=['due'])%}
+            {% if todo.complete == False %}
+              {% if todo.due_date == today %}
+                {% if messages %}
+                    <div class="due">
+                        {{ messages[0] }}
+                    </div>
+                {% endif %}
+              {% endif %}
+            {% endif %}
+          {% endwith %}
           <br>
           {% if todo.complete == False %}
           <span class="incomplete-div">Not Complete</span>
@@ -55,14 +66,26 @@
   </div>
 </div>
 <div class="calendar">
-  <form action="/update_date" method="POST">
+  <form action="/update_date" method="GET">
     <div class="input-wrapper">
-    <label for="date">Select a date:</label>
-    <input type="date" id="date" name="date">
+    <label for="date">Filter by Date:</label>
+    <input type="date" id="date" name="date" required>
     <br>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Filter">
     </div>
+    <br>
   </form>
+  <form action="/update_category" method="GET">
+    <label for="category">Filter by Category:</label>
+    <select id="category" name="category">
+        {% for category in categories %}
+            <option value="{{ category }}">{{ category }}</option>
+        {% endfor %}
+    </select>
+    <div class="input-wrapper">
+    <input type="submit" value="Filter">
+    </div>
+</form>
     <div class="simple-button">
       <button style="font-family: 'Poppins',sans-serif; font-size: 16px; font-weight: 600; border-radius: 10px; padding:10px;" onclick="redirectToPage()">See all items</button>
 
@@ -76,7 +99,7 @@
     
 </div>
 <div class="plant">
-  {% with messages = get_flashed_messages() %}
+  {% with messages = get_flashed_messages(category_filter=['celebrate']) %}
         {% if messages %}
             <div class="celebration">
                 {{ messages[0] }}

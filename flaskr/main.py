@@ -1,12 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
 from flask_login import login_required, current_user
-from sqlalchemy.exc import IntegrityError
 import requests
 from . import db
 from datetime import date
 from . import cache
 from .models import Todo, Statistics
-import json
 from datetime import datetime
 
 main = Blueprint("main", __name__)
@@ -30,12 +28,12 @@ def api_call():
 
 
 @main.route("/")
+# simple home page
 def home():
     return render_template("home.html")
 
 @main.route("/todo", methods=["POST", "GET"])
-# query todo table for all todo items for current user
-# render index.html with todo_list
+# main page with todo logic and statistics, only accessible to logged in users, otherwise redirects to login page
 @login_required
 def index():
     text = api_call()
@@ -55,20 +53,40 @@ def index():
         plant_stats = 0
     else:
         plant_stats = stats.plants_grown
+   
+   #check if due date is today and flash a message if it is
+    today = date.today()
+    formatted_today = datetime.strptime(str(today), '%Y-%m-%d')
+    for todo in todo_list:
+        if todo.due_date is None:
+            pass
+        elif todo.due_date == formatted_today:
+            flash("This task is due today!", "due")
+        
     
-    
+    # flash a message each time a plant is grown
+    if plant_stats == 0:
+        pass    
+    elif plant_stats % 10 == 0:
+        flash("You have grown a plant!", "celebrate")
+
+    tasks = Todo.query.filter_by(username=current_user.username).all()
+    categories = set(task.category for task in tasks)
+
     return render_template(
         "index.html",
         quote=text,
         todo_list=todo_list,
-        plant_stats=plant_stats
+        plant_stats=plant_stats,
+        today= formatted_today,
+        categories=categories
               )
 
-@main.route("/update_date", methods=["POST"])
+@main.route("/update_date", methods=["GET"])
 @login_required
 def update_date():
     text = api_call()
-    selected_date = request.form.get("date") 
+    selected_date = request.args.get("date") 
     # convert selected_date to same datetime format as date_created and query todo table for all todo items for current user made on selected date
     formatted_date = datetime.strptime(selected_date, '%Y-%m-%d')
     todo_list = (
@@ -102,6 +120,67 @@ def update_date():
         plant_stats=plant_stats,
         todo_list=todo_list
         )
+
+
+
+@main.route("/update_category", methods=["GET"])
+@login_required
+def update_category(category_selected=None):
+    text = api_call()
+    category_selected = request.args.get("category")
+    if category_selected == None:
+        return redirect(url_for("main.index"))
+    
+    todo_list = (
+        db.session.query(Todo)
+        .filter(
+            Todo.username == current_user.username,
+            Todo.category == category_selected ,
+        )
+        .all()
+    )
+    stats = (
+        db.session.query(Statistics)
+        .filter(
+            Statistics.username == current_user.username,
+            Statistics.month == date.today().strftime("%B"),
+            Statistics.year == date.today().strftime("%Y"),
+        )
+        .first()
+    )
+    if stats is None:
+        plant_stats = 0
+    else:
+        plant_stats = stats.plants_grown
+   
+   #check if due date is today and flash a message if it is
+    today = date.today()
+    formatted_today = datetime.strptime(str(today), '%Y-%m-%d')
+    for todo in todo_list:
+        if todo.due_date is None:
+            pass
+        elif todo.due_date == formatted_today:
+            flash("This task is due today!", "due")
+
+    if plant_stats == 0:
+        pass    
+    elif plant_stats % 10 == 0:
+        flash("You have grown a plant!", "celebrate")
+
+    tasks = Todo.query.filter_by(username=current_user.username).all()
+    categories = set(task.category for task in tasks)
+
+    return render_template(
+        "index.html",
+        quote=text,
+        todo_list=todo_list,
+        plant_stats=plant_stats,
+        today= formatted_today,
+        categories=categories
+        )
+
+        
+
 
 @main.post("/add")
 # title is the name of the input field in index.html
@@ -171,13 +250,16 @@ def update(todo_id):
         todo.complete = not todo.complete
         todo.previously_completed = True
         stats.completed_tasks += 1
-        stats.plants_grown += 0.1
+        stats.plants_grown += 1
         db.session.commit()
 
     else:
         todo.complete = not todo.complete
         db.session.commit()
+    
     return redirect(url_for("main.index"))
+
+    
 
 
 @main.get("/delete/<int:todo_id>")
@@ -204,7 +286,7 @@ def profile():
         .first()
     )
     if monthly_stats is None:
-        monthly_stats = 0
+        tasks = 0
         plants = 0
         month = date.today().strftime("%B")
         year = date.today().strftime("%Y")
@@ -213,6 +295,7 @@ def profile():
         plants = monthly_stats.plants_grown
         month = date.today().strftime("%B")
         year = date.today().strftime("%Y")
+
     return render_template(
         "profile.html",
         plants=plants,

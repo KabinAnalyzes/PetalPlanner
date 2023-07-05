@@ -119,7 +119,6 @@ input[type='text'], input[type='password'] {
 input[type='submit'] {
     background-color: #949494;
     font-family: 'Poppins', sans-serif;
-
     width: 90%;
     height: 45px;
     color: white;
@@ -194,13 +193,23 @@ input[type='submit']:hover {
     padding: 5px;
     max-width: 200px;
 }
+.due{ 
+    background-color: #cb5757;
+    position: relative;
+    top: 3%;
+    left: 20%;
+    border: 2px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 5px;
+    max-width: 200px;
+}
 .calendar{
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 40%;
+    top: 45%;
     left: 75%; /* Adjust the left value to create spacing between the two divs */
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -39%);
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -266,9 +275,11 @@ input[type='submit']:hover {
   }
   
   select {
+    position: relative;
+    display: block;
+    left: 15%;
     padding: 5px;
     font-size: 14px;
-    background-color: #009e6c;
   }
   
   button {
