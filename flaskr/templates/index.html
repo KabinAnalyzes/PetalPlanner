@@ -8,6 +8,8 @@
   {{ quote }} 
   {{ author }}
 </h1>
+<div class="total">
+
           <div class="todo-box">
                 <br>
                 <form action="/add" method="post">
@@ -28,11 +30,10 @@
                 </form>
           </div>
       </form>
-      </h2>
+
     
       
-      
-      <div class="blank-div"></div>
+      <br>
 <div class="todo-contain" >
       {% for todo in todo_list %}
       <div class="bordered-div">
@@ -64,7 +65,7 @@
       <br>
       {% endfor %}
   </div>
-</div>
+<br>
 <div class="calendar">
   <form action="/update_date" method="GET">
     <div class="input-wrapper">
@@ -97,6 +98,7 @@
     </div>
 
 
+
 </div>
 <div class="plant">
   {% with messages = get_flashed_messages(category_filter=['celebrate']) %}
@@ -108,6 +110,5 @@
         {% endwith %}
   <img id="plant" src="/static/plant/{{ plant_stage }}.png" alt="plant"> 
   <p> {{ plant_stats }} </p>
-</div>
 </body>
 {% endblock %}

@@ -65,9 +65,10 @@ input[type="date"] {
 }
 .quote-box{
     display: flex;
-    flex-direction: column;
-    position: relative;
-    transform: translate(0%, -40%);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
     max-width: 400px;
     font-weight: bold;
     font-size: larger;
@@ -139,12 +140,9 @@ input[type='submit']:hover {
 }
 
 .todo-box {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    top: 50%;
-    left: 0%;
     /* transform: translate(-165%, -20%); */
+    grid-column: 1;
+    grid-row: 1;
     max-width: 400px;
     min-width: 400px;
     padding: 20px;
@@ -161,14 +159,21 @@ input[type='submit']:hover {
     }
 }
 
+.total
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px; /* Adjust the gap between items */
+
+}
 
 
 .todo-contain {
+    grid-column: 1;
+    grid-row: 2;
     display: flex;
     flex-direction: column;
     position: relative;
-    top: 50%;
-    left: 0%;
     height: 450px;
     overflow: auto;
     width: 400px;
@@ -187,18 +192,34 @@ input[type='submit']:hover {
     opacity: 0.9;
 }
 .plant
-{
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 90%;
-    left: 75%; /* Adjust the left value to create spacing between the two divs */
-    transform: translate(-50%, -50%);
+{   grid-column: 2;
+    grid-row: 2;
+    top: 70%;
+    left: 80%; /* Adjust the left value to create spacing between the two divs */
     border: 2px solid #dbdbdb;
     border-radius: 5px;
+    max-width: 400px;
+    min-width: 400px;
     width: 20%;
 
 }
+
+@media (max-width: 767px) {
+    .plant {
+      flex-basis: 100%; /* Each item takes 100% of the container's width on smaller screens */
+    }
+    .calendar {
+        flex-basis: 100%; /* Each item takes 100% of the container's width on smaller screens */
+      }
+      .todo-box {
+        flex-basis: 100%; /* Each item takes 100% of the container's width on smaller screens */
+      }
+      .todo-contain {
+        flex-basis: 100%; /* Each item takes 100% of the container's width on smaller screens */
+      }
+  }
+    
+
 .celebration { 
     display: flex;
     flex-direction: column;
@@ -223,15 +244,15 @@ input[type='submit']:hover {
     max-width: 200px;
 }
 .calendar{
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 45%;
-    left: 75%; /* Adjust the left value to create spacing between the two divs */
-    transform: translate(-50%, -39%);
+    grid-column: 2;
+    grid-row: 1;
+    top: 20%;
+    left: 60%; /* Adjust the left value to create spacing between the two divs */
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 400px;
+    min-width: 300px;
     background-color: rgba(255,255,255,0.26); ;
 
 }
