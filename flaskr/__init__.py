@@ -11,15 +11,15 @@ cache = Cache(config={'CACHE_TYPE': 'simple','CACHE_DEFAULT_TIMEOUT': 86400})
 
 def create_app():
 
-    app=Flask(__name__)
-    cache.init_app(app)
+    application=Flask(__name__)
+    cache.init_app(application)
 
-    app.config['SECRET_KEY'] = "secret-key"
-    app.config['SQLALCHEMY_DATABASE_URI'] =\
+    application.config['SECRET_KEY'] = "secret-key"
+    application.config['SQLALCHEMY_DATABASE_URI'] =\
     'sqlite:///' + os.path.join(basedir, 'data.db')
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    db.init_app(app)
+    db.init_app(application)
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
@@ -33,11 +33,11 @@ def create_app():
         return User.query.get(int(user_id))
     
     from .main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
+    application.register_blueprint(main_blueprint)
 
     from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
+    application.register_blueprint(auth_blueprint)
 
-    return app
+    return application
 
 app=create_app()
