@@ -205,18 +205,9 @@ input[type='submit']:hover {
 }
 
 @media (max-width: 767px) {
-    .plant {
-      flex-basis: 100%; /* Each item takes 100% of the container's width on smaller screens */
+    .total {
+        grid-template-columns: 1fr;
     }
-    .calendar {
-        flex-basis: 100%; /* Each item takes 100% of the container's width on smaller screens */
-      }
-      .todo-box {
-        flex-basis: 100%; /* Each item takes 100% of the container's width on smaller screens */
-      }
-      .todo-contain {
-        flex-basis: 100%; /* Each item takes 100% of the container's width on smaller screens */
-      }
   }
     
 
