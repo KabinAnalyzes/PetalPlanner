@@ -33,10 +33,10 @@ def create_app():
         return User.query.get(int(user_id))
 
     from .main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
+    application.register_blueprint(main_blueprint)
 
     from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
+    application.register_blueprint(auth_blueprint)
 
     return application
 
