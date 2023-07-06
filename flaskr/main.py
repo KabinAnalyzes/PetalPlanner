@@ -3,7 +3,6 @@ from flask_login import login_required, current_user
 import requests
 from . import db
 from datetime import date
-from . import app
 from . import cache
 from .models import Todo, Statistics
 from datetime import datetime

@@ -1,7 +1,6 @@
 from sqlalchemy.sql import func
 from flask_login import UserMixin
 from . import db
-from . import app
 
 # This is the database model for the user and todo items
 # The UserMixin class provides default implementations for the methods that Flask-Login expects user objects to have.
