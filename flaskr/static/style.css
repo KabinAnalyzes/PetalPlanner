@@ -204,9 +204,12 @@ input[type='submit']:hover {
 
 }
 
-@media (max-width: 767px) {
+@media only screen and (max-width: 767px) {
     .total {
+        display: grid;
         grid-template-columns: 1fr;
+        padding: 1em;
+        grid-row-gap: 10px;
     }
   }
     
