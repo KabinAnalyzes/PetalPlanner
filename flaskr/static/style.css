@@ -6761,7 +6761,7 @@ body.has-navbar-fixed-bottom, html.has-navbar-fixed-bottom {
 }
 
 .navbar-menu {
-    display: none
+    display: inline
 }
 
 .navbar-item, .navbar-link {
@@ -6858,6 +6858,8 @@ body.has-navbar-fixed-bottom, html.has-navbar-fixed-bottom {
     height: 2px;
     margin: .5rem 0
 }
+
+    
 
 @media screen and (max-width:1087px) {
     .navbar>.container {
