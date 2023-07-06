@@ -186,12 +186,31 @@ input[type='submit']:hover {
     background-color: rgba(255,255,255,0.26);
     opacity: 0.9;
 }
+.plant
+{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 90%;
+    left: 75%; /* Adjust the left value to create spacing between the two divs */
+    transform: translate(-50%, -50%);
+    border: 2px solid #dbdbdb;
+    border-radius: 5px;
+    width: 20%;
+
+}
 .celebration { 
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 70%;
+    left: 20%;
     background-color: #00c4a7;
     border: 2px solid #dbdbdb;
     border-radius: 4px;
     padding: 5px;
-    max-width: 200px;
+    width: 50%;
+    height: auto;
 }
 .due{ 
     background-color: #cb5757;
@@ -294,17 +313,7 @@ input[type='submit']:hover {
     background-color: #a5f39e;
   }
   
-.plant
-{
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 90%;
-    left: 75%; /* Adjust the left value to create spacing between the two divs */
-    transform: translate(-50%, -50%);
-    border: 2px solid #dbdbdb;
 
-}
 
 .incomplete-div {
     border: 2px solid #dbdbdb;

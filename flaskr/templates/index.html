@@ -96,7 +96,7 @@
       </script>
     </div>
 
-    
+
 </div>
 <div class="plant">
   {% with messages = get_flashed_messages(category_filter=['celebrate']) %}
@@ -106,6 +106,8 @@
             </div>
         {% endif %}
         {% endwith %}
-  <p>Plants Grown: {{ plant_stats }} </p>
+  <img id="plant" src="/static/plant/{{ plant_stage }}.png" alt="plant"> 
+  <p> {{ plant_stats }} </p>
+</div>
 </body>
 {% endblock %}

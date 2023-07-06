@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
+from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint, session
 from flask_login import login_required, current_user
 import requests
 from . import db
@@ -27,6 +27,14 @@ def api_call():
     return text
 
 
+# helper function to calculate plant stage
+def stage(number_tasks):
+    if number_tasks == 0:
+        return number_tasks % 12 + 1
+    else:
+        return number_tasks % 12
+
+
 @main.route("/")
 # simple home page
 def home():
@@ -52,7 +60,7 @@ def index():
     if stats is None:
         plant_stats = 0
     else:
-        plant_stats = stats.plants_grown
+        plant_stats = stats.completed_tasks
    
    #check if due date is today and flash a message if it is
     today = date.today()
@@ -62,26 +70,69 @@ def index():
             pass
         elif todo.due_date == formatted_today:
             flash("This task is due today!", "due")
-        
     
-    # flash a message each time a plant is grown
-    if plant_stats == 0:
-        pass    
-    elif plant_stats % 10 == 0:
-        flash("You have grown a plant!", "celebrate")
+    
+    
 
     tasks = Todo.query.filter_by(username=current_user.username).all()
     categories = set(task.category for task in tasks)
+    growth_stage = stage(plant_stats)
 
-    return render_template(
+    if growth_stage < 3 and growth_stage != 0:
+        plant_stage = "seed"
+        return render_template(
         "index.html",
-        quote=text,
-        todo_list=todo_list,
-        plant_stats=plant_stats,
-        today= formatted_today,
-        categories=categories
+        quote = text,
+        todo_list = todo_list,
+        plant_stats = plant_stats,
+        today = formatted_today,
+        categories = categories,
+        plant_stage =  plant_stage
               )
 
+
+    elif growth_stage < 6 and growth_stage > 2:
+        plant_stage = "sprout"
+        return render_template(
+        "index.html",
+        quote = text,
+        todo_list = todo_list,
+        plant_stats = plant_stats,
+        today = formatted_today,
+        categories = categories,
+        plant_stage = plant_stage
+              )
+
+    elif growth_stage <= 11 and growth_stage > 5:
+        plant_stage = "sapling"
+        return render_template(
+        "index.html",
+        quote = text,
+        todo_list = todo_list,
+        plant_stats = plant_stats,
+        today = formatted_today,
+        categories = categories,
+        plant_stage = plant_stage
+              )
+
+    elif growth_stage == 0:
+        if "plant_grown" not in session:
+            plant_stage = "flower"
+            flash("You have grown a plant!", "celebrate")
+            session["plant_grown"] = True
+        else:
+            plant_stage = "flower"
+        return render_template(
+        "index.html",
+        quote = text,
+        todo_list = todo_list,
+        plant_stats = plant_stats,
+        today = formatted_today,
+        categories = categories,
+        plant_stage = plant_stage,
+        test_stats  = plant_stats
+              )
+        
 @main.route("/update_date", methods=["GET"])
 @login_required
 def update_date():
@@ -243,6 +294,9 @@ def update(todo_id):
         .first()
     )
     todo = db.session.query(Todo).filter(Todo.id == todo_id).first()
+    if stage(stats.completed_tasks) % 12 == 0:
+        stats.plants_grown +=1
+        db.session.commit()
     # check if todo item has been previously completed
     # if not, update todo item as complete and update previously_completed to True
     # update completed_tasks in statistics table for the current month and year
@@ -250,7 +304,6 @@ def update(todo_id):
         todo.complete = not todo.complete
         todo.previously_completed = True
         stats.completed_tasks += 1
-        stats.plants_grown += 1
         db.session.commit()
 
     else:
