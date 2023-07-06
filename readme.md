@@ -1,8 +1,8 @@
-# Petal Planner
+# Petal Planner 🌱
 
 ## Overview
 
-Welcome to the Petal Planner web application! This application utilizes Python Flask for the backend and HTML and CSS for the front end. Its main purpose is to provide users with daily motivational quotes, allow them to add and keep track of tasks they need to complete, and track their progress throughout the month. Additionally, as a source of motivation, the application displays a growing plant when users complete all their tasks for the day.
+Welcome to the Petal Planner 🌱 web application! This application utilizes Python Flask for the backend and HTML and CSS for the front end. Its main purpose is to provide users with daily motivational quotes, allow them to add and keep track of tasks they need to complete, and track their progress throughout the month. Additionally, as a source of motivation, the application displays a growing plant when users complete all their tasks for the day.
 
 ## Features
 
